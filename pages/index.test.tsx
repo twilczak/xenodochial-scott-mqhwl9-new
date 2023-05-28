@@ -1,42 +1,33 @@
-import "isomorphic-unfetch";
-import { rest } from "msw";
-import { setupServer } from "msw/node";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 
 import IndexPage from "./index";
 
-const server = setupServer(
-  rest.get("https://api.openweathermap.org/*", (_req, res, ctx) => {
-    return res(
-      ctx.json({
-        weather: [
-          {
-            description: "Overcast clouds",
-          },
-        ],
-        main: {
-          // temp in Kelvin
-          temp: 295.372,
-        },
-      })
-    );
-  })
-);
+jest.mock("../services/get-weather", () => () => {
+    return new Promise((resolve) => {
+        resolve({
+            weather: [
+                {
+                    description: "Overcast clouds",
+                },
+            ],
+            main: {
+                // temp in Kelvin
+                temp: 295.372,
+            },
+        });
+    });
+});
 
-beforeAll(() => server.listen());
-afterEach(() => server.resetHandlers());
-afterAll(() => server.close());
-
-test("renders without search input", async () => {
+test("Renders without search input", async () => {
   render(<IndexPage />);
 
-  expect(screen.getByText("Weather Search:")).toBeTruthy;
-  expect(screen.getByRole("textbox")).toBeTruthy;
-  expect(screen.getByRole("button")).toBeTruthy;
+  expect(screen.getByText("Weather Search:")).toBeTruthy();
+  expect(screen.getByRole("textbox")).toBeTruthy();
+  expect(screen.getByRole("button")).toBeTruthy();
 
-  expect(screen.queryByText("Temperature:")).toEqual(null);
-  expect(screen.queryByText("Descripiton:")).toEqual(null);
+  expect(screen.queryByText("Temperature:")).toBeNull()
+  expect(screen.queryByText("Description:")).toBeNull()
 });
 
 test("Renders with search input", async () => {
@@ -46,9 +37,8 @@ test("Renders with search input", async () => {
   await user.type(input, "springfield");
 
   const button = screen.getByRole("button");
-  await user.type(button, "{enter}");
-  // console.log(button);
-  // await user.click(button);
+  await user.click(button);
 
-  // expect(screen.getByText("Descripiton: Overcast Clouds")).toBeTruthy;
+  expect(screen.getByText("Description: Overcast clouds")).toBeTruthy();
+  expect(screen.getByText("Temperature: 72 ℉")).toBeTruthy();
 });

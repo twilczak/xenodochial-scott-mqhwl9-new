@@ -9,8 +9,9 @@ export default function IndexPage() {
         className="flex items-center justify-center"
         onSubmit={(e) => {
           e.preventDefault();
-          const formdata = new FormData(e.currentTarget);
-          setCity(formdata.get("city").toString());
+          const formData = new FormData(e.currentTarget);
+          const city = formData.get("city") as string;
+          setCity(city);
         }}
       >
         <span>Weather Search:</span>{" "}
