@@ -1,13 +1,6 @@
 import React from "react";
 import GetWeather from "../services/get-weather";
-
-interface CityWeatherProps {
-  city: string;
-}
-
-interface CityWeatherState {
-  weatherResult: any;
-}
+import { CityWeatherProps, CityWeatherState } from "./city-weather.types";
 
 export default class CityWeather extends React.Component<
   CityWeatherProps,

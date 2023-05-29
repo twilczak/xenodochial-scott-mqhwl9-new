@@ -1,5 +1,6 @@
 import { useState } from "react";
 import CityWeather from "../components/city-weather";
+import { CityWeatherRefactor } from "../components/city-weather-refactor";
 
 export default function IndexPage() {
   const [city, setCity] = useState<string | null>(null);
@@ -27,7 +28,7 @@ export default function IndexPage() {
 
       {city && (
         <div className="mt-4">
-          <CityWeather city={city} />
+          <CityWeatherRefactor city={city} />
         </div>
       )}
     </div>
