@@ -1,5 +1,4 @@
 import { useState } from "react";
-import CityWeather from "../components/city-weather";
 import { CityWeatherRefactor } from "../components/city-weather-refactor";
 
 export default function IndexPage() {
