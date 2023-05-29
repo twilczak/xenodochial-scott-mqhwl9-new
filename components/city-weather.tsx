@@ -30,15 +30,14 @@ export default class CityWeather extends React.Component<
     const { city } = this.props;
     const { weatherResult } = this.state;
 
-    return (
+    return !weatherResult ? null : (
       <div>
         <h1>{city}</h1>
         <div>
-          Temperature:{" "}
-          {weatherResult && KtoF(weatherResult.main.temp).toFixed(0)} &#8457;
+          Temperature: {KtoF(weatherResult.main.temp).toFixed(0)} &#8457;
         </div>
         <div>
-          Description: {weatherResult && weatherResult.weather[0].description}
+          Description: {weatherResult.weather[0].description}
         </div>
       </div>
     );
