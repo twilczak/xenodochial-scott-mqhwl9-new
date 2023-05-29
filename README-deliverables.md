@@ -7,7 +7,7 @@
 
 The bug was caused by two null references in the render() method of the CityWeather component. The initial render, 
 called when the component was mounted, but before the component's state was set, resulted in the component failing to
-render. The simplest solution was to include guards in the render method to avoid any reference to weatherResult if it 
+render. The simplest solution was to include a guard in the render method to avoid any reference to weatherResult if it 
 was null.
 
 I also included an initial unit test as part of this deliverable, though I was not able to get the initial stub test to
