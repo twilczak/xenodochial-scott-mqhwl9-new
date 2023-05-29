@@ -13,7 +13,7 @@ was null.
 I also included an initial unit test as part of this deliverable, though I was not able to get the initial stub test to
 pass with the included msw mock. Any time that the msw mock GET call was reached, the test would crash with a 
 segmentation fault. I am not sure whether this was part of the challenge or an unfortunate error that came up due to 
-some other underlying bug. I attempted to run this code on multiple version of node, and attempted a few other solutions
+some other underlying bug. I attempted to run this code on multiple versions of node, and attempted a few other solutions
 without success. Ultimately, I applied a bit of light refactoring and jest manual mocking in order to get this test to 
 pass. 
 
