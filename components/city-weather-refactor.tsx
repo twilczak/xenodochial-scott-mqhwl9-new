@@ -16,7 +16,7 @@ const CityWeatherRefactor = ({city}: CityWeatherProps) => {
                 setState({weatherResult: result, loading: false})
             }).catch(error => {
                 const message = error.cause && error.cause.message ? ` - ${error.cause.message}` : ""
-                setState({weatherResult: null, loading: false, error: `Cannot load data for "${city}"${message}`});
+                setState({weatherResult: null, loading: false, error: `Cannot load weather for "${city}"${message}`});
             });
     }, [city]);
 
@@ -25,11 +25,13 @@ const CityWeatherRefactor = ({city}: CityWeatherProps) => {
     if(weatherResult === null) {
         if(loading) {
             return (<DataLoading message={`Loading weather for ${city}...`}/>);
-        } else if(error) {
-            return (<ErrorMessage message={error}/>);
-        } else {
-            return null
         }
+
+        if(error) {
+            return (<ErrorMessage message={error}/>);
+        }
+
+        return null
     }
 
     return (
