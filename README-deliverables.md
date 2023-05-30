@@ -48,7 +48,7 @@ consistent with what the rest of the team might use rather than introducing new 
 be revisited. I did use a custom color for the search button that matched the design as I was unable to find a tailwind 
 color that was close enough. Similarly, I tried to get all the spacing values as close as I could, but I am not 100% 
 certain they are _perfect_. I didn't implement hover or focus states, and left the default focus ring alone as the
-design didn't include these. 
+design didn't include these. These are all things I would discuss with designers or other devs given the chance.
 
 
 - Refactoring: 
