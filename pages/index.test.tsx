@@ -39,6 +39,7 @@ test("Renders with search input", async () => {
   const button = screen.getByRole("button");
   await user.click(button);
 
-  expect(screen.getByText("Description: Overcast clouds")).toBeTruthy();
-  expect(screen.getByText("Temperature: 72 ℉")).toBeTruthy();
+  expect(screen.getByText("Overcast clouds")).toBeTruthy();
+  expect(screen.getByText("Temperature:")).toBeTruthy();
+  expect(screen.getByText("72℉")).toBeTruthy();
 });
