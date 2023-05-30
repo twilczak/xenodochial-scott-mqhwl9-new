@@ -10,7 +10,6 @@ jest.mock("../services/get-weather", () => () => {
 });
 
 describe("Weather search index", () => {
-    beforeEach(() => jest.resetAllMocks());
 
     it("Renders without search input", async () => {
         render(<IndexPage />);
@@ -23,19 +22,35 @@ describe("Weather search index", () => {
         expect(screen.queryByText("Description:")).toBeNull()
     });
 
-    it("Renders with search input", async () => {
+    it("Renders a loading indicator", async () => {
         const user = userEvent.setup();
+
+        mockGetWeather = () => new Promise(() => {});
+
+        render(<IndexPage />);
+        const input = screen.getByRole("textbox");
+        await user.type(input, "springfield");
+
+        const button = screen.getByRole("button");
+        await user.click(button);
+
+        expect(screen.getByTestId("data-loading-component")).toBeTruthy();
+    });
+
+    it("Renders weather results", async () => {
+        const user = userEvent.setup();
+
         mockGetWeather = () => Promise.resolve({
-            weather: [
-                {
-                    description: "Overcast clouds",
-                },
-            ],
-            main: {
-                // temp in Kelvin
-                temp: 295.372,
-            },
-        });
+                        weather: [
+                            {
+                                description: "Overcast clouds",
+                            },
+                        ],
+                        main: {
+                            // temp in Kelvin
+                            temp: 295.372,
+                        },
+                    });
 
         render(<IndexPage />);
         const input = screen.getByRole("textbox");
@@ -47,9 +62,10 @@ describe("Weather search index", () => {
         expect(screen.getByText("Overcast clouds")).toBeTruthy();
         expect(screen.getByText("Temperature:")).toBeTruthy();
         expect(screen.getByText("72℉")).toBeTruthy();
+        expect(screen.queryByTestId("data-loading-component")).toBeNull();
     });
 
-    it("Renders an error message with search input", async () => {
+    it("Renders an error message", async () => {
         const user = userEvent.setup();
         mockGetWeather = () => Promise.reject(
             Error("Mock Error", {cause: {message: "City Not Found"}})
