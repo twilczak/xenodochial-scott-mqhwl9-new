@@ -14,12 +14,13 @@ export default function IndexPage() {
           setCity(city);
         }}
       >
-        <label className="font-medium text-lg">Weather Search:</label>{" "}
+        <label className="font-medium text-lg" htmlFor="city">Weather Search:</label>{" "}
         <div className="ml-2 flex">
             <input
               className="px-2 py-2 rounded-l-md border border-r-0 border-gray-300"
               type="text"
               name="city"
+              id="city"
             />
             <button className="px-3 py-2 bg-[#4583C7] text-white uppercase font-extrabold rounded-r-md text-sm" type="submit">
               Submit
@@ -28,7 +29,7 @@ export default function IndexPage() {
       </form>
 
       {city && (
-        <div className="mt-4 flex justify-center items-center">
+        <div className="mt-4 flex justify-center items-center" aria-live="assertive">
           <CityWeatherRefactor city={city} />
         </div>
       )}

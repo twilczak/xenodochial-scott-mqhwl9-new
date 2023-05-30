@@ -4,4 +4,6 @@ export interface CityWeatherProps {
 
 export interface CityWeatherState {
     weatherResult: any;
+    loading?: boolean;
+    error?: any;
 }
