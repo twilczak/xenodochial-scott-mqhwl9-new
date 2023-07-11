@@ -40,7 +40,7 @@ I tried to get the resulting components as close to the design as possible. I th
 
 
 - Refactoring: 
-I decided to split the rendering and data loading logic into multiple pieces. Some teams prefer more self-contained logic. By default, I tend to prefer smaller components that are easier to reason about, and keep loading functionality separate from purely display logic. In my experience it is easier to reuse smaller pieces through composition this way. However, I would also discuss this approach with the team to ensure consistency with existing practices.
+I decided to split the rendering and data loading logic into multiple pieces. Some teams prefer more self-contained logic. By default, I tend to prefer smaller components that are easier to reason about, and keep loading functionality separate from purely display logic. In my experience it is easier to reuse smaller pieces through composition this way. However, I would also discuss this approach with the team to balance my preferences with existing team practices.
 
 
 - Testing:
