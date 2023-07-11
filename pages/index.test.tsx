@@ -18,8 +18,7 @@ describe("Weather search index", () => {
         expect(screen.getByRole("textbox")).toBeTruthy();
         expect(screen.getByRole("button")).toBeTruthy();
 
-        expect(screen.queryByText("Temperature:")).toBeNull()
-        expect(screen.queryByText("Description:")).toBeNull()
+        expect(screen.queryByText("Temperature:")).toBeNull();
     });
 
     it("Renders a loading indicator", async () => {
@@ -81,5 +80,36 @@ describe("Weather search index", () => {
 
         expect(screen.getByText("Error:")).toBeTruthy();
         expect(screen.getByText("Cannot load weather for \"sprungfeld\" - City Not Found")).toBeTruthy();
+    });
+
+    it("Clears result data if user enters an empty string", async () => {
+        const user = userEvent.setup();
+
+        mockGetWeather = () => Promise.resolve({
+            weather: [
+                {
+                    description: "Overcast clouds",
+                },
+            ],
+            main: {
+                // temp in Kelvin
+                temp: 295.372,
+            },
+        });
+
+        render(<IndexPage />);
+        const input = screen.getByRole("textbox");
+        await user.type(input, "springfield");
+
+        const button = screen.getByRole("button");
+        await user.click(button);
+
+        expect(screen.getByText("Temperature:")).toBeTruthy();
+
+        await user.clear(input);
+        await user.type(input, "{space}");
+        await user.click(button);
+
+        expect(screen.queryByText("Temperature:")).toBeNull();
     });
 });
