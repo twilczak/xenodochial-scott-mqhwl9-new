@@ -1,11 +1,5 @@
 import React from "react";
-
-export interface CityWeatherTileProps {
-    city: string,
-    icon: string,
-    description: string,
-    temperature: number
-}
+import { CityWeatherTileProps } from "./city-weather-tile.types";
 
 export const CityWeatherTile = ({city, icon, description, temperature}: CityWeatherTileProps) => {
     return (

@@ -34,7 +34,7 @@ describe("Weather search index", () => {
         const button = screen.getByRole("button");
         await user.click(button);
 
-        expect(screen.getByTestId("data-loading-component")).toBeTruthy();
+        expect(screen.getByTestId("loading-indicator-component")).toBeTruthy();
     });
 
     it("Renders weather results", async () => {
@@ -62,7 +62,7 @@ describe("Weather search index", () => {
         expect(screen.getByText("Overcast clouds")).toBeTruthy();
         expect(screen.getByText("Temperature:")).toBeTruthy();
         expect(screen.getByText("72℉")).toBeTruthy();
-        expect(screen.queryByTestId("data-loading-component")).toBeNull();
+        expect(screen.queryByTestId("loading-indicator-component")).toBeNull();
     });
 
     it("Renders an error message", async () => {

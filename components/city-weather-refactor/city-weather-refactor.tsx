@@ -1,10 +1,10 @@
 import React, {useEffect, useState} from "react";
-import { DataLoading } from "./data-loading";
-import { ErrorMessage } from "./error-message";
-import GetWeather from "../services/get-weather";
+import { LoadingIndicator } from "../loading-indicator/loading-indicator";
+import { ErrorMessage } from "../error-message/error-message";
+import GetWeather from "../../services/get-weather";
 
-import { CityWeatherProps, CityWeatherState } from "./city-weather.types";
-import { CityWeatherTile } from "./city-weather-tile";
+import { CityWeatherProps, CityWeatherState } from "../city-weather.types";
+import { CityWeatherTile } from "../city-weather-tile/city-weather-tile";
 
 const CityWeatherRefactor = ({city}: CityWeatherProps) => {
     const [state, setState] =
@@ -25,7 +25,7 @@ const CityWeatherRefactor = ({city}: CityWeatherProps) => {
 
     if(weatherResult === null) {
         if(loading) {
-            return (<DataLoading message={`Loading weather for ${city}...`}/>);
+            return (<LoadingIndicator message={`Loading weather for ${city}...`}/>);
         }
 
         if(error) {

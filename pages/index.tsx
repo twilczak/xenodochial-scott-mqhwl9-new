@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { CityWeatherRefactor } from "../components/city-weather-refactor";
+import { CityWeatherRefactor } from "../components/city-weather-refactor/city-weather-refactor";
 
 export default function IndexPage() {
   const [city, setCity] = useState<string | null>(null);
