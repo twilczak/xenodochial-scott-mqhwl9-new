@@ -35,6 +35,7 @@ describe("Weather search index", () => {
         await user.click(button);
 
         expect(screen.getByTestId("loading-indicator-component")).toBeTruthy();
+        expect(screen.getByText("Loading weather for springfield...")).toBeTruthy();
     });
 
     it("Renders weather results", async () => {
