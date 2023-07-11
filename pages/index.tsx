@@ -10,8 +10,10 @@ export default function IndexPage() {
         onSubmit={(e) => {
           e.preventDefault();
           const formData = new FormData(e.currentTarget);
-          const city = formData.get("city") as string;
-          setCity(city);
+          let city = formData.get("city");
+          if(typeof city === "string" && city.trim().length > 0) {
+              setCity(city);
+          }
         }}
       >
         <label className="font-medium text-lg" htmlFor="city">Weather Search:</label>{" "}
